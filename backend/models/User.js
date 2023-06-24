@@ -133,6 +133,4 @@ UserSchema.methods.isFollowing = function(id) {
   });
 };
 
-
-
 mongoose.model("User", UserSchema);
