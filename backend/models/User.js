@@ -32,11 +32,7 @@ var UserSchema = new mongoose.Schema(
     favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     hash: String,
-    salt: String,
-    isVerified: {
-      type: Boolean,
-      default: false
-    },
+    salt: String
   },
   { timestamps: true }
 );
@@ -79,8 +75,7 @@ UserSchema.methods.toAuthJSON = function() {
     token: this.generateJWT(),
     bio: this.bio,
     image: this.image,
-    role: this.role,
-    isVerified: this.isVerified,
+    role: this.role
   };
 };
 
@@ -90,8 +85,7 @@ UserSchema.methods.toProfileJSONFor = function(user) {
     bio: this.bio,
     image:
       this.image || "https://static.productionready.io/images/smiley-cyrus.jpg",
-    following: user ? user.isFollowing(this._id) : false,
-    isVerified: this.isVerified,
+    following: user ? user.isFollowing(this._id) : false
   };
 };
 
@@ -132,7 +126,5 @@ UserSchema.methods.isFollowing = function(id) {
     return followId.toString() === id.toString();
   });
 };
-
-
 
 mongoose.model("User", UserSchema);

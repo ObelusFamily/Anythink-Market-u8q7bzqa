@@ -53,10 +53,6 @@ router.get("/", auth.optional, function(req, res, next) {
     query.tagList = { $in: [req.query.tag] };
   }
 
-  if (typeof req.query.isVerified !== "undefined") {
-    query.isVerified = req.query.isVerified;
-  }
-
   Promise.all([
     req.query.seller ? User.findOne({ username: req.query.seller }) : null,
     req.query.favorited ? User.findOne({ username: req.query.favorited }) : null
@@ -87,7 +83,6 @@ router.get("/", auth.optional, function(req, res, next) {
         var items = results[0];
         var itemsCount = results[1];
         var user = results[2];
-        console.log("user log", user)
         return res.json({
           items: await Promise.all(
             items.map(async function(item) {
