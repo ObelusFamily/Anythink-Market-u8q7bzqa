@@ -35,7 +35,7 @@ var UserSchema = new mongoose.Schema(
     salt: String,
     isVerified: {
       type: Boolean,
-      default: true
+      default: false
     },
   },
   { timestamps: true }
