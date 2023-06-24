@@ -56,7 +56,7 @@ const ItemPreview = (props) => {
               />
             </Link>
 
-            {item.seller.isVerified ??
+            {item.seller.isVerified ? (
               <div className="d-flex align-items-center">
                 
                 <img 
@@ -68,7 +68,7 @@ const ItemPreview = (props) => {
                   style={{ fontSize: '1.3rem'}}
                   className="m-0"
                 >TOP SELLER</p>
-              </div>
+              </div>) : ""
           }
             
           </div>
